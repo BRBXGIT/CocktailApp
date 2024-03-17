@@ -75,7 +75,11 @@ dependencies {
     implementation("com.google.accompanist:accompanist-navigation-animation:0.24.1-alpha")
     //System bars color impl
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+    //Collect liveData with state impl
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
 
+
+    //Basic impl
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
