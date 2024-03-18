@@ -14,6 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.example.cocktailapp"
         minSdk = 26
+        //noinspection EditedTargetSdkVersion
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -62,6 +63,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("androidx.compose.animation:animation-graphics-android:1.6.3")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.graphics:graphics-shapes-android:1.0.0-alpha05")
     kapt("androidx.room:room-compiler:2.6.1")
     //Hilt impl
     implementation("com.google.dagger:hilt-android:2.50")
@@ -73,10 +75,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.24.1-alpha")
-    //System bars color impl
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
-    //Collect liveData with state impl
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
 
 
     //Basic impl
