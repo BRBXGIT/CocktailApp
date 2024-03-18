@@ -47,7 +47,7 @@ object AppModule {
     //Provide repository implementation
     @Provides
     @Singleton
-    fun provideCocktailRepositoryImpl(cocktailApi: CocktailApi): CocktailRepository {
-        return CocktailRepositoryImpl(cocktailApi)
+    fun provideCocktailRepositoryImpl(cocktailApi: CocktailApi, cocktailDao: CocktailDao): CocktailRepository {
+        return CocktailRepositoryImpl(cocktailApi, cocktailDao)
     }
 }
