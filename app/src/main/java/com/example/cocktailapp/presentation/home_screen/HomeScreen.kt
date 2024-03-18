@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,14 +23,14 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.cocktailapp.R
 
 @Composable
 fun HomeScreen() {
 
-    val fontForLabel = FontFamily(
-        Font(R.font.playfairdispla_regular)
-    )
+    val fontForLabel = FontFamily(Font(R.font.playfairdispla_regular))
+    val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
 
     //Main column
     Column(
@@ -37,10 +38,7 @@ fun HomeScreen() {
             .fillMaxSize()
             .background(
                 Brush.linearGradient(
-                    listOf(
-                        Color(0xff26162f),
-                        Color(0xff101b25)
-                    )
+                    listOf(Color(0xff26162f), Color(0xff101b25))
                 )
             )
     ) {
@@ -86,8 +84,8 @@ fun HomeScreen() {
             )
         }
 
-        //Row with lazyColumn and box with categories
-        Row(modifier = Modifier.fillMaxSize(),) {
+        //Row with lazyColumn and column with categories
+        Row(modifier = Modifier.fillMaxSize()) {
             Column(
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -95,18 +93,28 @@ fun HomeScreen() {
                     .fillMaxHeight()
                     .fillMaxWidth(0.3f)
             ) {
-                CocktailCategory(category = "Shot", icon = R.drawable.ic_glass, iconDescription = "Glass cocktails")
-                CocktailCategory(category = "Long", icon = R.drawable.ic_flute, iconDescription = "Flute cocktails")
-                CocktailCategory(category = "NonAlc", icon = R.drawable.ic_sad, iconDescription = "Nonalcohol cocktails")
+                //Categories
+                CocktailCategory(category = "Shot", icon = R.drawable.ic_glass, iconDescription = "Glass cocktails", homeScreenViewModel = homeScreenViewModel)
+                CocktailCategory(category = "Long", icon = R.drawable.ic_flute, iconDescription = "Flute cocktails", homeScreenViewModel = homeScreenViewModel)
+                CocktailCategory(category = "NonAlc", icon = R.drawable.ic_sad, iconDescription = "Nonalcohol cocktails", homeScreenViewModel = homeScreenViewModel)
             }
 
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-
+            if(homeScreenViewModel.chosenCategory != "") {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(end = 16.dp)
+                ) {
+                    items(homeScreenViewModel.chosenCocktails.drinks) { drink ->
+                        CocktailCard(
+                            title = drink.strDrink,
+                            homeScreenViewModel = homeScreenViewModel,
+                            isInFavorite = false,
+                            picture = drink.strDrinkThumb
+                        )
+                    }
+                }
             }
         }
     }
-
 }

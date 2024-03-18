@@ -1,6 +1,5 @@
 package com.example.cocktailapp.presentation.home_screen
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,7 +9,6 @@ import com.example.cocktailapp.data.remote.CocktailData
 import com.example.cocktailapp.data.remote.Drink
 import com.example.cocktailapp.data.repository.CocktailRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,27 +17,28 @@ class HomeScreenViewModel @Inject constructor(
     private val cocktailRepositoryImpl: CocktailRepositoryImpl
 ): ViewModel() {
 
+    //Var for making right api calls and change color of chosen drink
+    var chosenCategory by mutableStateOf("")
+
     //All cocktails in glass get function
-    var cocktailsInGlass by mutableStateOf(CocktailData(listOf(Drink())))
+    var chosenCocktails by mutableStateOf(CocktailData(listOf(Drink())))
     fun getAllCocktailsInGlass() {
         viewModelScope.launch {
-            cocktailsInGlass = cocktailRepositoryImpl.getCocktailsInGlass().body()!!
+            chosenCocktails = cocktailRepositoryImpl.getCocktailsInGlass().body()!!
         }
     }
 
     //All cocktails in flute get function
-    var cocktailsInFlute by mutableStateOf(CocktailData(listOf(Drink())))
     fun getAllCocktailsInFlute() {
         viewModelScope.launch {
-            cocktailsInFlute = cocktailRepositoryImpl.getCocktailsInFlute().body()!!
+            chosenCocktails = cocktailRepositoryImpl.getCocktailsInFlute().body()!!
         }
     }
 
     //All nonalcoholic cocktails
-    var nonAlcoholicCocktails by mutableStateOf(CocktailData(listOf(Drink())))
     fun getAllNonalcoholicCocktails() {
         viewModelScope.launch {
-            nonAlcoholicCocktails = cocktailRepositoryImpl.getNonAlcoholicCocktails().body()!!
+            chosenCocktails = cocktailRepositoryImpl.getNonAlcoholicCocktails().body()!!
         }
     }
 
