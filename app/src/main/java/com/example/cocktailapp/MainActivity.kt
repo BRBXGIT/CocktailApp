@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.cocktailapp.presentation.bottom_bar.NavGraph
+import com.example.cocktailapp.presentation.home_screen.HomeScreenViewModel
 import com.example.cocktailapp.ui.theme.CocktailAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +23,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             CocktailAppTheme {
                 val navController = rememberNavController()
-                NavGraph(navController = navController)
+                val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
+                NavGraph(navController = navController, homeScreenViewModel = homeScreenViewModel)
             }
         }
     }

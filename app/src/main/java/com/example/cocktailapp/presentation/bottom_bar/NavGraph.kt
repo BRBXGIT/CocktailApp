@@ -7,11 +7,13 @@ import androidx.navigation.compose.composable
 import com.example.cocktailapp.presentation.cocktail_screen.CocktailScreen
 import com.example.cocktailapp.presentation.favorites_scrren.FavoritesScreen
 import com.example.cocktailapp.presentation.home_screen.HomeScreen
+import com.example.cocktailapp.presentation.home_screen.HomeScreenViewModel
 import com.example.cocktailapp.presentation.search_screen.SearchScreen
 
 @Composable
 fun NavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    homeScreenViewModel: HomeScreenViewModel
 ) {
     NavHost(
         navController = navController,
@@ -19,25 +21,30 @@ fun NavGraph(
     ) {
         composable(route = "home_screen") {
             HomeScreen(
-                navController = navController
+                navController = navController,
+                homeScreenViewModel = homeScreenViewModel
             )
         }
 
         composable(route = "favorites_screen") {
             FavoritesScreen(
-                navController = navController
+                navController = navController,
+                homeScreenViewModel = homeScreenViewModel
             )
         }
 
         composable(route = "search_screen") {
             SearchScreen(
-                navController = navController
+                navController = navController,
+                homeScreenViewModel = homeScreenViewModel
             )
         }
 
         composable(route = "cocktail_screen") {
-            CocktailScreen()
+            CocktailScreen(
+                navController = navController,
+                homeScreenViewModel = homeScreenViewModel
+            )
         }
-
     }
 }

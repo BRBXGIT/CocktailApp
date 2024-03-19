@@ -25,7 +25,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.cocktailapp.R
 import com.example.cocktailapp.presentation.bottom_bar.BottomBar
@@ -33,11 +32,11 @@ import com.example.cocktailapp.presentation.bottom_bar.BottomBar
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    homeScreenViewModel: HomeScreenViewModel
 ) {
 
     val fontForLabel = FontFamily(Font(R.font.playfairdispla_regular))
-    val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
 
     Scaffold(
         bottomBar = {
@@ -121,7 +120,8 @@ fun HomeScreen(
                             CocktailCard(
                                 title = drink.strDrink,
                                 homeScreenViewModel = homeScreenViewModel,
-                                picture = drink.strDrinkThumb
+                                picture = drink.strDrinkThumb,
+                                navController = navController
                             )
                         }
                     }

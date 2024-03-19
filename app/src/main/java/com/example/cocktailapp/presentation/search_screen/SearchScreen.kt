@@ -9,11 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.cocktailapp.presentation.bottom_bar.BottomBar
+import com.example.cocktailapp.presentation.home_screen.HomeScreenViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SearchScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    homeScreenViewModel: HomeScreenViewModel
 ) {
     Scaffold(
         bottomBar = {

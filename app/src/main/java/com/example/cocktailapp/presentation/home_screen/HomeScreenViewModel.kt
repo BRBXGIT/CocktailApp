@@ -24,6 +24,9 @@ class HomeScreenViewModel @Inject constructor(
 
     //All cocktails in glass get function
     var chosenCocktails by mutableStateOf(CocktailData(listOf(Drink())))
+
+    //Current cocktail
+    var currentCocktail by mutableStateOf(CocktailData(listOf(Drink())))
     fun getAllCocktailsInGlass() {
         viewModelScope.launch {
             chosenCocktails = cocktailRepositoryImpl.getCocktailsInGlass().body()!!

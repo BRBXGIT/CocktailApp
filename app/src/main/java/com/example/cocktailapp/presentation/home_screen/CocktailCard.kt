@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cocktailapp.R
 import com.example.cocktailapp.data.db.Cocktail
@@ -37,6 +38,7 @@ fun CocktailCard(
     title: String,
     homeScreenViewModel: HomeScreenViewModel,
     picture: Any?,
+    navController: NavHostController
 ) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -46,6 +48,9 @@ fun CocktailCard(
             .fillMaxWidth()
             .height(400.dp)
             .padding(bottom = 16.dp)
+            .clickable {
+                navController.navigate("cocktail_screen")
+            }
     ) {
         Box(
             modifier = Modifier

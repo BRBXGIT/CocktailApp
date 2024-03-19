@@ -1,6 +1,7 @@
 package com.example.cocktailapp.di
 
 import android.content.Context
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.Room
 import com.example.cocktailapp.data.remote.CocktailApi
 import com.example.cocktailapp.data.db.CocktailDao
@@ -8,6 +9,7 @@ import com.example.cocktailapp.data.db.CocktailDb
 import com.example.cocktailapp.data.db.CocktailDb_Impl
 import com.example.cocktailapp.data.repository.CocktailRepositoryImpl
 import com.example.cocktailapp.domain.repository.CocktailRepository
+import com.example.cocktailapp.presentation.home_screen.HomeScreenViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

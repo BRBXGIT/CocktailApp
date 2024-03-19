@@ -31,7 +31,7 @@ fun BottomBar(
         containerColor = Color(0xff222225),
         modifier = Modifier
             .height(110.dp)
-            .padding(28.dp)
+            .padding(bottom = 28.dp, top = 28.dp, start = 32.dp, end = 32.dp)
             .clip(RoundedCornerShape(20.dp))
     ) {
         Row(
