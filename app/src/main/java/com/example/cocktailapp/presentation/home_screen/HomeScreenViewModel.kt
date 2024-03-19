@@ -5,10 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cocktailapp.data.db.Cocktail
 import com.example.cocktailapp.data.remote.CocktailData
 import com.example.cocktailapp.data.remote.Drink
 import com.example.cocktailapp.data.repository.CocktailRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,6 +42,23 @@ class HomeScreenViewModel @Inject constructor(
         viewModelScope.launch {
             chosenCocktails = cocktailRepositoryImpl.getNonAlcoholicCocktails().body()!!
         }
+    }
+
+    //Local db functions
+    fun upsertNewCocktailToFavorites(title: String) {
+        viewModelScope.launch {
+            cocktailRepositoryImpl.upsertNewCocktail(Cocktail(title))
+        }
+    }
+
+    fun deleteCocktailFromFavorites(title: String) {
+        viewModelScope.launch {
+            cocktailRepositoryImpl.deleteCocktail(Cocktail(title))
+        }
+    }
+
+    fun getAllFavoriteCocktails(): Flow<List<Cocktail>> {
+        return cocktailRepositoryImpl.getAllCocktails()
     }
 
 }

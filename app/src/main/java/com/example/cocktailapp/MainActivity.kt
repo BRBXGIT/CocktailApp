@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import com.example.cocktailapp.presentation.bottom_bar.NavGraph
-import com.example.cocktailapp.presentation.home_screen.HomeScreen
 import com.example.cocktailapp.ui.theme.CocktailAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

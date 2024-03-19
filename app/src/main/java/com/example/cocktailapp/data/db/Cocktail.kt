@@ -5,7 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Cocktail(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val url: String
+    @PrimaryKey
+    val title: String
 )

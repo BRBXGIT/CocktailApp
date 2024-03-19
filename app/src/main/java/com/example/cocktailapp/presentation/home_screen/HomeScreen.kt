@@ -121,7 +121,6 @@ fun HomeScreen(
                             CocktailCard(
                                 title = drink.strDrink,
                                 homeScreenViewModel = homeScreenViewModel,
-                                isInFavorite = false,
                                 picture = drink.strDrinkThumb
                             )
                         }
