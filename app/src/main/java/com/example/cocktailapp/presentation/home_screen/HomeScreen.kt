@@ -26,19 +26,22 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.cocktailapp.R
 import com.example.cocktailapp.presentation.bottom_bar.BottomBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavHostController
+) {
 
     val fontForLabel = FontFamily(Font(R.font.playfairdispla_regular))
     val homeScreenViewModel = hiltViewModel<HomeScreenViewModel>()
 
     Scaffold(
         bottomBar = {
-            BottomBar()
+            BottomBar(navController)
         }
     ) {
         //Main column
@@ -47,7 +50,7 @@ fun HomeScreen() {
                 .fillMaxSize()
                 .background(
                     Brush.linearGradient(
-                        listOf(Color(0xff26162f), Color(0xfff7f7f7))
+                        listOf(Color(0xff26162f), Color(0xff101b25))
                     )
                 )
         ) {
