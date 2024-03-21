@@ -49,6 +49,7 @@ fun CocktailCard(
             .height(400.dp)
             .padding(bottom = 16.dp)
             .clickable {
+                homeScreenViewModel.getCocktailByName(title)
                 navController.navigate("cocktail_screen")
             }
     ) {

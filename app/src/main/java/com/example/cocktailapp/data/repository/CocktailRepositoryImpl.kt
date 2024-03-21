@@ -14,33 +14,41 @@ class CocktailRepositoryImpl @Inject constructor(
     private val cocktailDao: CocktailDao
 ): CocktailRepository {
 
+
     //Api functions
     override suspend fun getCocktailsInFlute(): Response<CocktailData> {
         return cocktailApi.getCocktailsInFlute()
     }
 
+
     override suspend fun getCocktailsInGlass(): Response<CocktailData> {
         return cocktailApi.getCocktailsInGlass()
     }
+
 
     override suspend fun getNonAlcoholicCocktails(): Response<CocktailData> {
         return cocktailApi.getNonAlcoholicCocktails()
     }
 
+
     override suspend fun getCocktailByName(cocktail: String): Response<CocktailData> {
         return cocktailApi.getCocktailByName(cocktail)
     }
+
 
     //Local db functions
     override fun getAllCocktails(): Flow<List<Cocktail>> {
         return cocktailDao.getAllCocktails()
     }
 
+
     override suspend fun deleteCocktail(cocktail: Cocktail) {
         return cocktailDao.deleteCocktail(cocktail)
     }
 
+
     override suspend fun upsertNewCocktail(cocktail: Cocktail) {
         return cocktailDao.upsertNewCocktail(cocktail)
     }
+
 }

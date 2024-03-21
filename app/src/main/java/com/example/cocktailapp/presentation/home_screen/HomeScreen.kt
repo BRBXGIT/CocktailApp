@@ -37,7 +37,6 @@ fun HomeScreen(
 ) {
 
     val fontForLabel = FontFamily(Font(R.font.playfairdispla_regular))
-
     Scaffold(
         bottomBar = {
             BottomBar(navController)
@@ -116,7 +115,7 @@ fun HomeScreen(
                             .fillMaxSize()
                             .padding(end = 16.dp)
                     ) {
-                        items(homeScreenViewModel.chosenCocktails.drinks) { drink ->
+                        items(homeScreenViewModel.chosenCocktails.drinks!!) { drink ->
                             CocktailCard(
                                 title = drink.strDrink,
                                 homeScreenViewModel = homeScreenViewModel,

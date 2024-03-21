@@ -19,33 +19,40 @@ class HomeScreenViewModel @Inject constructor(
     private val cocktailRepositoryImpl: CocktailRepositoryImpl
 ): ViewModel() {
 
-    //Var for making right api calls and change color of chosen drink
+    //Category for making right api calls(glass, flute or nonalcoholic)
     var chosenCategory by mutableStateOf("")
 
-    //All cocktails in glass get function
+    //Cocktails chosen by category and api function under it
     var chosenCocktails by mutableStateOf(CocktailData(listOf(Drink())))
-
-    //Current cocktail
-    var currentCocktail by mutableStateOf(CocktailData(listOf(Drink())))
     fun getAllCocktailsInGlass() {
         viewModelScope.launch {
             chosenCocktails = cocktailRepositoryImpl.getCocktailsInGlass().body()!!
         }
     }
 
-    //All cocktails in flute get function
+
     fun getAllCocktailsInFlute() {
         viewModelScope.launch {
             chosenCocktails = cocktailRepositoryImpl.getCocktailsInFlute().body()!!
         }
     }
 
-    //All nonalcoholic cocktails
+
     fun getAllNonalcoholicCocktails() {
         viewModelScope.launch {
             chosenCocktails = cocktailRepositoryImpl.getNonAlcoholicCocktails().body()!!
         }
     }
+
+
+    //Var which keeps only one cocktail which user click
+    var currentCocktail by mutableStateOf(CocktailData(listOf(Drink())))
+    fun getCocktailByName(name: String) {
+        viewModelScope.launch {
+            currentCocktail = cocktailRepositoryImpl.getCocktailByName(name).body()!!
+        }
+    }
+
 
     //Local db functions
     fun upsertNewCocktailToFavorites(title: String) {
@@ -54,11 +61,13 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
+
     fun deleteCocktailFromFavorites(title: String) {
         viewModelScope.launch {
             cocktailRepositoryImpl.deleteCocktail(Cocktail(title))
         }
     }
+
 
     fun getAllFavoriteCocktails(): Flow<List<Cocktail>> {
         return cocktailRepositoryImpl.getAllCocktails()
