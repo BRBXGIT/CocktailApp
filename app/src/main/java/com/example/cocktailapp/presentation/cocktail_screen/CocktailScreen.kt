@@ -11,7 +11,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -25,15 +26,16 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cocktailapp.R
 import com.example.cocktailapp.data.db.Cocktail
-import com.example.cocktailapp.data.remote.Drink
 import com.example.cocktailapp.presentation.bottom_bar.noRippleClickable
 import com.example.cocktailapp.presentation.home_screen.HomeScreenViewModel
 
@@ -58,8 +60,6 @@ fun CocktailScreen(
         cocktail.strIngredient11, cocktail.strIngredient12,
         cocktail.strIngredient13
     )
-
-    Log.d("XXXX", ingredients.toString())
 
     Column(
         modifier = Modifier
@@ -141,50 +141,53 @@ fun CocktailScreen(
                 )
 
         ) {
-
             //Box with title
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(0.15f),
-                contentAlignment = Alignment.TopStart
-            ) {
-                Text(
-                    text = cocktail.strDrink,
-                    fontFamily = fontForTitle,
-                    fontSize = 30.sp,
-                    modifier = Modifier.padding(top = 24.dp, start = 16.dp),
-                    color = Color(0xfff7f7f7)
-                )
-            }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.15f)
-                    .padding(start = 16.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
-                    text = "Ingredients: ",
-                    fontSize = 20.sp,
+                    text = cocktail.strDrink,
+                    fontSize = 25.sp,
+                    fontFamily = fontForTitle,
+                    modifier = Modifier.padding(start = 16.dp),
                     color = Color(0xfff7f7f7)
                 )
             }
 
-            LazyColumn(
+            //Lazy row with pictures of ingredients
+            LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(0.3f)
-                    .padding(start = 16.dp)
+                    .fillMaxHeight(0.4f),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(ingredients) { ingredient ->
-                    if(ingredient != null) {
-                        Text(
-                            text = ingredient,
-                            fontSize = 15.sp,
-                            color = Color(0xfff7f7f7)
-                        )
+                    if((ingredient != null) && (ingredient != "")) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .width(120.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                                .background(Color(0xff231f2b)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth(0.9f)
+                                    .fillMaxHeight(0.9f),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                AsyncImage(
+                                    model = "https://www.thecocktaildb.com/images/ingredients/$ingredient.png",
+                                    contentDescription = "Ingredient photo",
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -193,16 +196,17 @@ fun CocktailScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 16.dp, end = 16.dp),
-                contentAlignment = Alignment.TopCenter
+                contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = cocktail.strInstructions,
                     fontSize = 20.sp,
-                    color = Color(0xfff7f7f7)
+                    color = Color(0xfff7f7f7),
+                    style = TextStyle.Default.copy(
+                        lineBreak = LineBreak.Paragraph
+                    )
                 )
             }
-
         }
-
     }
 }

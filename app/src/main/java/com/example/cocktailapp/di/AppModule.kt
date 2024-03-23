@@ -24,6 +24,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+
     //Provide dao for local db
     @Provides
     @Singleton
@@ -34,6 +35,7 @@ object AppModule {
             "CocktailDb"
         ).build().CocktailDao()
     }
+
 
     //Provide cocktail api
     @Provides
@@ -46,10 +48,12 @@ object AppModule {
             .create()
     }
 
+
     //Provide repository implementation
     @Provides
     @Singleton
     fun provideCocktailRepositoryImpl(cocktailApi: CocktailApi, cocktailDao: CocktailDao): CocktailRepository {
         return CocktailRepositoryImpl(cocktailApi, cocktailDao)
     }
+
 }

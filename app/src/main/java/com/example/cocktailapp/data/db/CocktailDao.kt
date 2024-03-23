@@ -9,11 +9,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CocktailDao {
 
+
     @Upsert
     suspend fun upsertNewCocktail(cocktail: Cocktail)
 
+
     @Delete
     suspend fun deleteCocktail(cocktail: Cocktail)
+
 
     @Query("SELECT * FROM cocktail")
     fun getAllCocktails(): Flow<List<Cocktail>>
