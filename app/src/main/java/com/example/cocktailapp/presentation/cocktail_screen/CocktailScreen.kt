@@ -1,7 +1,6 @@
 package com.example.cocktailapp.presentation.cocktail_screen
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -49,9 +48,9 @@ fun CocktailScreen(
     val cocktail = homeScreenViewModel.currentCocktail.drinks!![0]
     val fontForTitle = FontFamily(Font(R.font.playfairdispla_regular))
 
-    /*Hardcode need to rewrite, but api didn't updates since 2015.
+    /* Hardcode need to rewrite, but api didn't updates since 2015.
     I don't think something will change) */
-    val ingredients = listOf(
+    val ingredients: List<String?> = listOf(
         cocktail.strIngredient1, cocktail.strIngredient2,
         cocktail.strIngredient3, cocktail.strIngredient4,
         cocktail.strIngredient5, cocktail.strIngredient6,
@@ -166,7 +165,7 @@ fun CocktailScreen(
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(ingredients) { ingredient ->
-                    if((ingredient != null) && (ingredient != "")) {
+                    if(ingredient != null) {
                         Box(
                             modifier = Modifier
                                 .fillMaxHeight()

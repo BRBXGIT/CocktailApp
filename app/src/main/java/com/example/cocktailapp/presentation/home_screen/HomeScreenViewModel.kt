@@ -54,6 +54,14 @@ class HomeScreenViewModel @Inject constructor(
     }
 
 
+    var cocktailsByName by mutableStateOf(CocktailData(listOf(Drink())))
+    fun getCocktailsByName(name: String) {
+        viewModelScope.launch {
+            cocktailsByName = cocktailRepositoryImpl.getCocktailByName(name).body()!!
+        }
+    }
+
+
     //Local db functions
     fun upsertNewCocktailToFavorites(title: String) {
         viewModelScope.launch {
