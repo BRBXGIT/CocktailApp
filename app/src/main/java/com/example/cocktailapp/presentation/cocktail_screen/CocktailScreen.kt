@@ -44,13 +44,12 @@ fun CocktailScreen(
     navController: NavHostController,
     homeScreenViewModel: HomeScreenViewModel
 ) {
-
     val cocktail = homeScreenViewModel.currentCocktail.drinks!![0]
     val fontForTitle = FontFamily(Font(R.font.playfairdispla_regular))
 
     /* Hardcode need to rewrite, but api didn't updates since 2015.
     I don't think something will change) */
-    val ingredients: List<String?> = listOf(
+    val ingredients = listOf(
         cocktail.strIngredient1, cocktail.strIngredient2,
         cocktail.strIngredient3, cocktail.strIngredient4,
         cocktail.strIngredient5, cocktail.strIngredient6,
@@ -95,7 +94,7 @@ fun CocktailScreen(
                     modifier = Modifier
                         .padding(top = 48.dp)
                         .noRippleClickable {
-                            navController.navigate("home_screen")
+                            navController.popBackStack()
                         }
                 )
 

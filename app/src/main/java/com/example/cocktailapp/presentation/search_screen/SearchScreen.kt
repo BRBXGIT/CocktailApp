@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.cocktailapp.data.remote.Drink
 import com.example.cocktailapp.presentation.bottom_bar.BottomBar
 import com.example.cocktailapp.presentation.home_screen.CocktailCard
 import com.example.cocktailapp.presentation.home_screen.HomeScreenViewModel
@@ -58,7 +59,7 @@ fun SearchScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(0.3f)
+                    .fillMaxHeight(0.25f)
                     .padding(start = 16.dp, end = 16.dp),
                 contentAlignment = Alignment.Center
             ) {
@@ -108,8 +109,9 @@ fun SearchScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(start = 32.dp, end = 32.dp)
             ) {
-                if(!cocktails.isNullOrEmpty()) {
+                if((cocktails != null) && (cocktails[0].idDrink != "")) {
                     items(cocktails) { cocktail ->
                         CocktailCard(
                             title = cocktail.strDrink,

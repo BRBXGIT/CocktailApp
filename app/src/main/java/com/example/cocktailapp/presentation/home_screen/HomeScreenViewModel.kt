@@ -1,5 +1,6 @@
 package com.example.cocktailapp.presentation.home_screen
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -26,21 +27,33 @@ class HomeScreenViewModel @Inject constructor(
     var chosenCocktails by mutableStateOf(CocktailData(listOf(Drink())))
     fun getAllCocktailsInGlass() {
         viewModelScope.launch {
-            chosenCocktails = cocktailRepositoryImpl.getCocktailsInGlass().body()!!
+            try {
+                chosenCocktails = cocktailRepositoryImpl.getCocktailsInGlass().body()!!
+            } catch (e: Exception) {
+                Log.d("package:mine", e.toString())
+            }
         }
     }
 
 
     fun getAllCocktailsInFlute() {
         viewModelScope.launch {
-            chosenCocktails = cocktailRepositoryImpl.getCocktailsInFlute().body()!!
+            try {
+                chosenCocktails = cocktailRepositoryImpl.getCocktailsInFlute().body()!!
+            } catch(e: Exception) {
+                Log.d("package:mine", e.toString())
+            }
         }
     }
 
 
     fun getAllNonalcoholicCocktails() {
         viewModelScope.launch {
-            chosenCocktails = cocktailRepositoryImpl.getNonAlcoholicCocktails().body()!!
+            try {
+                chosenCocktails = cocktailRepositoryImpl.getNonAlcoholicCocktails().body()!!
+            } catch(e: Exception) {
+                Log.d("package:mine", e.toString())
+            }
         }
     }
 
@@ -49,7 +62,11 @@ class HomeScreenViewModel @Inject constructor(
     var currentCocktail by mutableStateOf(CocktailData(listOf(Drink())))
     fun getCocktailByName(name: String) {
         viewModelScope.launch {
-            currentCocktail = cocktailRepositoryImpl.getCocktailByName(name).body()!!
+            try {
+                currentCocktail = cocktailRepositoryImpl.getCocktailByName(name).body()!!
+            } catch(e: Exception) {
+                Log.d("package:mine", e.toString())
+            }
         }
     }
 
@@ -57,7 +74,11 @@ class HomeScreenViewModel @Inject constructor(
     var cocktailsByName by mutableStateOf(CocktailData(listOf(Drink())))
     fun getCocktailsByName(name: String) {
         viewModelScope.launch {
-            cocktailsByName = cocktailRepositoryImpl.getCocktailByName(name).body()!!
+            try {
+                cocktailsByName = cocktailRepositoryImpl.getCocktailByName(name).body()!!
+            } catch(e: Exception) {
+                Log.d("package:mine", e.toString())
+            }
         }
     }
 
